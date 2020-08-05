@@ -4,10 +4,8 @@ import com.lz.service.SayHelloService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +20,6 @@ public class HandlerProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         Map<String, SayHelloService> beansOfType = beanFactory.getBeansOfType(SayHelloService.class);
-
         HandlerContext handlerContext = new HandlerContext(beansOfType);
         beanFactory.registerSingleton("handlerContext",handlerContext);
     }
